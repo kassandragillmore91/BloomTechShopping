@@ -32,7 +32,7 @@ our customers' needs.
 you are still debating internally that you might like help working through.*
 
 1. What stores are we going to include in the shopping complex? 
-2.   
+2. How do we connect the front end to the back end?  
 3.  
 
 ## 3. Use Cases
@@ -73,19 +73,21 @@ U13. As a customer, I want to see if an item is in stock.
 
 - create an account
 - update account info
-- browse different categories
 - see product details
-- organize stores by alphabetical order or popularity
-- add a store/product to favorites
-- delete a store/product from favorites
-- see which stores are open or closed
-- see if item is in stock
+- add a store to favorites
+- delete a store from favorites
 
 ### 4.2. Out of Scope
 - see order total
 - check order status
 - place order
 - see order history
+- browse different categories
+- organize stores by alphabetical order or popularity
+- add a product to favorites
+- delete a product from favorites
+- see which stores are open or closed
+- see if item is in stock
 
 
 # 5. Proposed Architecture Overview
@@ -136,19 +138,17 @@ List<String> category;
 ## 6.2. Create Account Endpoint 
 
 * Accepts `POST` requests to `/accounts`
-* Accepts data to create a new account with a provided userId, name, and email. Returns the new account.
-* We will validate the provided userId for the new account does not contain any invalid characters: `" ' \`
-  * If the userId contains any of the invalid characters, will throw `InvalidCharacterException`.
+* Accepts data to create a new account with a provided username, password, and email. Returns the new account.
 
 ## 6.3 Update Account Endpoint
 
-* Accepts `PUT` requests to `/accounts/:userId`
-* Accepts data to update an account including the user ID, and an updated name or email. Returns updated account.
+* Accepts `PUT` requests to `/accounts`
+* Accepts data to update an account including the password or email. Returns updated account.
   * If user ID is not found, will throw a `UserNotFoundException`.
 
 ## 6.4 Get Account Info Endpoint
 
-* Accepts `GET` requests to `accounts/:userId`
+* Accepts `GET` requests to `accounts/`
 * Accepts a user ID and returns corresponding AccountModel.
   * If user ID is not found, will throw a `UserNotFoundException`
 
@@ -167,6 +167,7 @@ List<String> category;
   * If the user is not found, will throw `UserNotFoundException`
   * If the storeId doesn't exist, throw `StoreNotFoundException`
 
+## These ended up being out of scope.
 
 ## 6.7 Get Store Info Endpoint
 
@@ -208,6 +209,7 @@ category / list
 popularity / int
 ```
 
+## This was out of scope.
 ## 7.3. 'items'
 ```
 itemId // parition key, string
